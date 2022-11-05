@@ -63,7 +63,7 @@ app.get('/weather', (req, res) => {
             })
         }
     
-        weather(geo, (error, {area, message}) => {
+        weather(geo, (error, {area, message, icon}) => {
     
             if (error) {
                 return res.send({
@@ -74,7 +74,8 @@ app.get('/weather', (req, res) => {
             res.send({
                 location: area,
                 forecast: message,
-                address: req.query.address
+                address: req.query.address,
+                icon: icon
             })
         })
     })

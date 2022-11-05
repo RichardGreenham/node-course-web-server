@@ -6,22 +6,27 @@ const getWeather = ({geo, area}, callback) => {
 
     request({url: url, json: true}, (err, {body, current = body.current}) => {
 
+
+        console.log(current)
+
         if (err) {
             callback('cant connect', undefined)
             return
         }
 
 
-    if (body.error) {
-        callback('cant find address', undefined)
-        return
-    }
+        if (body.error) {
+            callback('cant find address', undefined)
+            return
+        }
 
         const message = current.weather_descriptions[0] + ' Its currently ' + current.temperature + ' degress out. There is a ' + current.precip + '% chance of rain.'
-        
+        const icon = current.weather_icons[0]
+
         callback(undefined, {
             area: area,
-            message: message
+            message: message,
+            icon: icon
         })
     })
 }
